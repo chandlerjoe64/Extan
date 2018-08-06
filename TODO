@@ -9,3 +9,8 @@ initialize CHECKED list
 create first word pattern 
 check sample for occurences
 add to CHECKED list with count of occurences
+
+FUNCTIONS:
+	open text sample
+	reformat
+	
