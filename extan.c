@@ -10,16 +10,15 @@ repeating patterns to aid in the creation of password dictionaries.
 
 #include<stdio.h>
 #include<stdlib.h>
-#include "extan.h"
 
 int main(int argc, char*argv[]) {
+   	
+   	//open sample text for reading
+   	FILE *fp;
+   	fp = fopen("Harry Potter and the Sorcerer's Stone.txt", "r");
+	
 
-}
 
-int open_text(char* filename, FILE* text) {
-	if((text = fopen(filename, "r")) == NULL) {
-		return 1;		//return 1 if error
+	//close sample text
+	fclose(fp);
 	}
-	return 0;			//return 0 if no error
-
-}
