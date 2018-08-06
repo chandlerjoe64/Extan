@@ -10,8 +10,16 @@ repeating patterns to aid in the creation of password dictionaries.
 
 #include<stdio.h>
 #include<stdlib.h>
+#include "extan.h"
 
 int main(int argc, char*argv[]) {
-	printf("Hello, world!\n");
+
+}
+
+int open_text(char* filename, FILE* text) {
+	if((text = fopen(filename, "r")) == NULL) {
+		return 1;		//return 1 if error
+	}
+	return 0;			//return 0 if no error
 
 }
