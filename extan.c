@@ -36,7 +36,9 @@ FILE * format_text(FILE* input_text) {
 			if(!(ispunct(buffer[i]))) {
 
 			output[i] = (tolower(buffer[i]));			//format and output each character into the output buffer
+			if(strcmp(output,"")) continue;		//if string is empty, do not write to output file
 			}
+
 		}	
 
 		printf("%s\n", output);	//TODO print output buffer to formated text file
