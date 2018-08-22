@@ -28,18 +28,19 @@ int main(int argc, char*argv[]) {
 
 FILE * format_text(FILE* input_text) {
 	int i;
+	int j;
 	char buffer[255];	//each word is read in to this buffer
 	char output[255];	//after the word is formated, it is fed to this buffer
 
 	while(fscanf(input_text, "%s", buffer) != EOF) {	//iterated over every word in the text
+		int j = 0;
 		for (i = 0; i < strlen(buffer); i++) {	//iterate over every character in the word
 			if(!(ispunct(buffer[i]))) {
-
-			output[i] = (tolower(buffer[i]));			//format and output each character into the output buffer
-			if(strcmp(output,"")) continue;		//if string is empty, do not write to output file
+				output[j] = (tolower(buffer[i]));			//format and output each character into the output buffer
+				j++;
 			}
-
 		}	
+		if(j == 0) continue;		//if string is empty, do not write to output file
 
 		printf("%s\n", output);	//TODO print output buffer to formated text file
 		memset(&output[0], 0, sizeof(output));	//clear output buffer for next iteration
