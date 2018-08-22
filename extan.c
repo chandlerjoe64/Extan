@@ -31,6 +31,8 @@ FILE * format_text(FILE* input_text) {
 	int j;
 	char buffer[255];	//each word is read in to this buffer
 	char output[255];	//after the word is formated, it is fed to this buffer
+	memset(&output[0], 0, sizeof(output));	//initialize output buffer
+
 
 	while(fscanf(input_text, "%s", buffer) != EOF) {	//iterated over every word in the text
 		int j = 0;
