@@ -5,7 +5,7 @@
 #include "extan.h"
 
 
-void format_text(FILE* input_text, FILE* output_text) {
+void format_text(FILE* input_text, FILE* formatted_text) {
 	int i;
 	int j;
 	char buffer[255];	//each word is read in to this buffer
@@ -24,9 +24,21 @@ void format_text(FILE* input_text, FILE* output_text) {
 		if(j == 0) continue;		//if string is empty, do not write to output file
 
 		output[j] = '\n';			//append newline to each word 
-		fputs(output, output_text);	//write each word to output_text
+		fputs(output, formatted_text);	//write each word to formatted_text
 
 		memset(&output[0], 0, sizeof(output));	//clear output buffer for next iteration
 	}
 	return;
+}
+
+char** populate_array(FILE* formatted_text) {
+	//determine word count of formatted.txt
+	int count;
+	FILE* wc = popen("wc -w < tmp/formatted.txt", "r");	//open stream to system for wc call
+	fscanf(wc, "%d", &count);	//read command output from the stream and store it in count
+	pclose(wc);	//close stream 
+
+	//create character array of size count
+	char** words = malloc(count*sizeof(char*));
+	return words;
 }

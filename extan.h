@@ -7,9 +7,6 @@ terminating with a newline character. After each word is
 sanatized, it is writed to output_text to await further 
 operation.
 */
-void format_text(FILE* input_text, FILE* output_text);
+void format_text(FILE* input_text, FILE* formatted_text);
 
-/*
-find duplicates funciton
-*/
-void find_duplicates();
+char** populate_array(FILE* formatted_text);
