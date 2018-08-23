@@ -1,32 +1,11 @@
-/*
-Joseph A. Chandler
-email: chandlerjoe64@gmail.com
-*/
-
-/*
-EXTAN (tEXT_ANanlysis) is a program which iterates over a given body of text to derive repeated patters of words. Its purpose is to identify phrases or other 
-repeating patterns to aid in the creation of password dictionaries.
-*/
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<ctype.h>
 #include<string.h>
 #include "extan.h"
 
-int main(int argc, char*argv[]) {
-   	
-   	//open sample text for reading
-   	FILE *fp;
-   	fp = fopen("Harry Potter and the Sorcerer's Stone.txt", "r");
-	
-   	FILE* formatted_text = format_text(fp);
 
-	//close sample text
-	fclose(fp);
-	}
-
-FILE * format_text(FILE* input_text) {
+void format_text(FILE* input_text, FILE* output_text) {
 	int i;
 	int j;
 	char buffer[255];	//each word is read in to this buffer
@@ -35,7 +14,7 @@ FILE * format_text(FILE* input_text) {
 
 
 	while(fscanf(input_text, "%s", buffer) != EOF) {	//iterated over every word in the text
-		int j = 0;
+		j = 0;
 		for (i = 0; i < strlen(buffer); i++) {	//iterate over every character in the word
 			if(!(ispunct(buffer[i]))) {
 				output[j] = (tolower(buffer[i]));			//format and output each character into the output buffer
@@ -44,13 +23,10 @@ FILE * format_text(FILE* input_text) {
 		}	
 		if(j == 0) continue;		//if string is empty, do not write to output file
 
-		printf("%s\n", output);	//TODO print output buffer to formated text file
+		output[j] = '\n';			//append newline to each word 
+		fputs(output, output_text);	//write each word to output_text
+
 		memset(&output[0], 0, sizeof(output));	//clear output buffer for next iteration
-
-		//printf("%s\n", buffer);
 	}
-
-	FILE *return_file;
-	return return_file;
-
+	return;
 }
