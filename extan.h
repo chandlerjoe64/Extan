@@ -1,7 +1,15 @@
 /*
-open file by the name of filename for reading and store it 
-in the point called text. If the file fails to open, the
-function returns a 1. If the funciton completes successfuly,
-it returns 0.
+takes as arguments pointers to files for input_text and 
+output_text which have already been opened. The function
+iterates over every word in input_text and santizes it 
+by converting to lower case, removing punctuation, and 
+terminating with a newline character. After each word is
+sanatized, it is writed to output_text to await further 
+operation.
 */
 void format_text(FILE* input_text, FILE* output_text);
+
+/*
+find duplicates funciton
+*/
+void find_duplicates();
