@@ -40,5 +40,18 @@ char** populate_array(FILE* formatted_text) {
 
 	//create character array of size count
 	char** words = malloc(count*sizeof(char*));
+
+	//read in words from formatted_text line by line
+	char line[255];
+	int counter =0;
+
+	rewind(formatted_text);	//move pointer back to beginning of file
+	while(fscanf(formatted_text, "%s", line) != EOF) {	//iterated over every word in the text
+		//printf("%s\n",line);	//DEBUG
+		//TODO feed words into array
+		counter++;
+	}
+	//printf("%s\n", words[999]);
+
 	return words;
 }

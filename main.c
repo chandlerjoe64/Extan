@@ -33,7 +33,7 @@ int main(int argc, char*argv[]) {
 		exit(0);
 	}
 
-	formatted_text = fopen("tmp/formatted.txt", "w");
+	formatted_text = fopen("tmp/formatted.txt", "rw");
 	if(formatted_text == NULL) {
 		printf("Failed to initialize output file...\nExiting...\n");
 		exit(0);
@@ -54,8 +54,7 @@ int main(int argc, char*argv[]) {
 
    //execute populate_array
    words = populate_array(formatted_text);
-
-      
+   printf("%s\n", words[989]);     
 
 
 
