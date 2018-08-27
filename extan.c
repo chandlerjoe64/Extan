@@ -28,6 +28,7 @@ void format_text(FILE* input_text, FILE* formatted_text) {
 
 		memset(&output[0], 0, sizeof(output));	//clear output buffer for next iteration
 	}
+	fclose(formatted_text);
 	return;
 }
 
@@ -36,7 +37,7 @@ void populate_array(char* words[], FILE* formatted_text) {
 	char line[128];
 	int counter =0;
 
-	rewind(formatted_text);	//move pointer back to beginning of file
+	//rewind(formatted_text);	//move pointer back to beginning of file
 
 	while(fscanf(formatted_text, "%s", line) != EOF) {	//iterated over every word in the text
 		words[counter] = malloc(sizeof(line));	//allocate mem for each string
@@ -58,12 +59,12 @@ void check_duplicates(int lengthToCheck, char* words[], FILE* checked_list, FILE
 			for(i=0; i < length; i++) {
 				if(words[arrayTracker+i] != NULL) {
 					strcat(stringToCheck, words[arrayTracker+i]);
-				}else continue;
+				}else break;
 			}
-			//printf("%d: %s\n",length, stringToCheck);	//DEBUG
-			
+			printf("%d: %s\n",length, stringToCheck);	//DEBUG
+
 			//TODO search text for stringToCheck
-			stringToCheck[0] = '\0';	//reinitialze stringToCheck
+			memset(stringToCheck, 0, sizeof(stringToCheck));	//reinitialze stringToCheck
 			length++;	
 		}
 		arrayTracker++;

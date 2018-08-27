@@ -25,13 +25,13 @@ int main(int argc, char*argv[]) {
 
 	//TODO create file opener function
 	//open files for execution and perform error checks
-	input_text = fopen("Harry Potter and the Sorcerer's Stone.txt", "r");
+	input_text = fopen("Harry Potter and the Sorcerer's Stone_short.txt", "r");
 	if(input_text == NULL) {
 		printf("Failed to open input file...\nExiting...\n");
 		exit(0);
 	}
 
-	formatted_text = fopen("tmp/formatted.txt", "rw");
+	formatted_text = fopen("tmp/formatted.txt", "w+");
 	if(formatted_text == NULL) {
 		printf("Failed to initialize output file...\nExiting...\n");
 		exit(0);
@@ -55,6 +55,13 @@ int main(int argc, char*argv[]) {
 	FILE* wc = popen("wc -w < tmp/formatted.txt", "r");	//open stream to system for wc call
 	fscanf(wc, "%d", &count);	//read command output from the stream and store it in count
 	pclose(wc);	//close stream     
+
+	//reopen formatted_text in r mode to avoid overwriting when rewinding in format_text
+	formatted_text = fopen("tmp/formatted.txt", "r");
+	if(formatted_text == NULL) {
+		printf("Failed to initialize output file...\nExiting...\n");
+		exit(0);
+	}
 
 	//initialize array
 	char* words[count];
