@@ -59,6 +59,7 @@ int main(int argc, char*argv[]) {
 	//initialize array
 	char* words[count];
 	populate_array(words, formatted_text);
+	words[count] = NULL;
 
 	//call check_duplicates
 	int lengthToCheck = 5;
