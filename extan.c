@@ -31,27 +31,35 @@ void format_text(FILE* input_text, FILE* formatted_text) {
 	return;
 }
 
-char** populate_array(FILE* formatted_text) {
-	//determine word count of formatted.txt
-	int count;
-	FILE* wc = popen("wc -w < tmp/formatted.txt", "r");	//open stream to system for wc call
-	fscanf(wc, "%d", &count);	//read command output from the stream and store it in count
-	pclose(wc);	//close stream 
-
-	//create character array of size count
-	char** words = malloc(count*sizeof(char*));
-
+void populate_array(char* words[], FILE* formatted_text) {
 	//read in words from formatted_text line by line
-	char line[255];
+	char line[128];
 	int counter =0;
 
 	rewind(formatted_text);	//move pointer back to beginning of file
+
 	while(fscanf(formatted_text, "%s", line) != EOF) {	//iterated over every word in the text
-		//printf("%s\n",line);	//DEBUG
-		//TODO feed words into array
+		words[counter] = malloc(sizeof(line));	//allocate mem for each string
+		strcpy(words[counter], line);	//copy lint into array
 		counter++;
 	}
-	//printf("%s\n", words[999]);
+	return;
+}
 
-	return words;
+void check_duplicates(int lengthToCheck, char* words[], FILE* checked_list, FILE* found_list) {
+	int length = 2;
+	int i;
+	int arrayTracker = 0;
+	char stringToCheck[512]; //string to be compared -- buffer size 512 char 
+
+	while(length <= lengthToCheck)	{	//generate all strings between the min and max word count
+		for(i=0; i < length; i++) {
+			strcat(stringToCheck, words[arrayTracker+i]);
+		}
+		printf("%d: %s\n",length, stringToCheck);	//DEBUG
+		//TODO search text for stringToCheck
+		stringToCheck[0] = '\0';	//reinitialze stringToCheck
+		length++;	
+	}
+	return;
 }

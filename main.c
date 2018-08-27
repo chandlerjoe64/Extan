@@ -23,9 +23,7 @@ int main(int argc, char*argv[]) {
 	FILE *checked_list;
 	FILE *found_list;
 
-   //populate_array variables
-   char** words;
-
+	//TODO create file opener function
 	//open files for execution and perform error checks
 	input_text = fopen("Harry Potter and the Sorcerer's Stone.txt", "r");
 	if(input_text == NULL) {
@@ -52,14 +50,21 @@ int main(int argc, char*argv[]) {
 	//execute format_text to sanatize input text
    format_text(input_text, formatted_text);
 
-   //execute populate_array
-   words = populate_array(formatted_text);
-   printf("%s\n", words[989]);     
+   //determine word count of formatted.txt
+	int count;
+	FILE* wc = popen("wc -w < tmp/formatted.txt", "r");	//open stream to system for wc call
+	fscanf(wc, "%d", &count);	//read command output from the stream and store it in count
+	pclose(wc);	//close stream     
 
+	//initialize array
+	char* words[count];
+	populate_array(words, formatted_text);
 
+	//call check_duplicates
+	int lengthToCheck = 5;
+	check_duplicates(lengthToCheck, words, checked_list, found_list);
 
 	//close sample text
-
 	fclose(input_text);
 	fclose(formatted_text);
 	

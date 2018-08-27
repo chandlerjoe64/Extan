@@ -9,4 +9,6 @@ operation.
 */
 void format_text(FILE* input_text, FILE* formatted_text);
 
-char** populate_array(FILE* formatted_text);
+void populate_array(char* words[], FILE* formatted_text);
+
+void check_duplicates(int lengthToCheck, char* words[], FILE* checked_list, FILE* found_list);
