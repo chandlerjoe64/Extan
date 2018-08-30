@@ -49,6 +49,7 @@ void populate_array(char* words[], FILE* formatted_text) {
 
 void check_duplicates(int lengthToCheck, char* words[], FILE* checked_list, FILE* found_list) {
 	int length;
+	int end;	//DEBUG
 	int i;
 	int arrayTracker = 0;
 	char stringToCheck[512]; //string to be compared -- buffer size 512 char 
@@ -56,14 +57,21 @@ void check_duplicates(int lengthToCheck, char* words[], FILE* checked_list, FILE
 	while(words[arrayTracker] != NULL) {
 		length = 2;
 		while(length <= lengthToCheck)	{	//generate all strings between the min and max word count
+			end = 0;
 			for(i=0; i < length; i++) {
 				if(words[arrayTracker+i] != NULL) {
 					strcat(stringToCheck, words[arrayTracker+i]);
-				}else break;
+				}else {
+					end = 1;
+					break;
+				}			
 			}
-			printf("%d: %s\n",length, stringToCheck);	//DEBUG
+			if(!end) {
+				printf("%d: %s\n",length, stringToCheck);	//DEBUG
 
-			//TODO search text for stringToCheck
+				//TODO search text for stringToCheck
+			}
+			
 			memset(stringToCheck, 0, sizeof(stringToCheck));	//reinitialze stringToCheck
 			length++;	
 		}
