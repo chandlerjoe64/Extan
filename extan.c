@@ -47,7 +47,7 @@ void populate_array(char* words[], FILE* formatted_text) {
 	return;
 }
 
-void check_duplicates(int lengthToCheck, char* words[], FILE* checked_list, FILE* found_list) {
+void generate_check_strings(int lengthToCheck, char* words[], FILE* checked_list, FILE* found_list) {
 	int length;
 	int end;	//DEBUG
 	int i;
@@ -71,7 +71,7 @@ void check_duplicates(int lengthToCheck, char* words[], FILE* checked_list, FILE
 
 				//TODO search text for stringToCheck
 			}
-			
+
 			memset(stringToCheck, 0, sizeof(stringToCheck));	//reinitialze stringToCheck
 			length++;	
 		}

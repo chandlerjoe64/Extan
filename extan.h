@@ -11,4 +11,4 @@ void format_text(FILE* input_text, FILE* formatted_text);
 
 void populate_array(char* words[], FILE* formatted_text);
 
-void check_duplicates(int lengthToCheck, char* words[], FILE* checked_list, FILE* found_list);
+void generate_check_strings(int lengthToCheck, char* words[], FILE* checked_list, FILE* found_list);
