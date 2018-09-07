@@ -47,12 +47,13 @@ void populate_array(char* words[], FILE* formatted_text) {
 	return;
 }
 
-void generate_check_strings(int lengthToCheck, char* words[], FILE* checked_list, FILE* found_list) {
+void generate_check_strings(int lengthToCheck, char* words[], char* check_strings[]) {
 	int length;
-	int end;	//DEBUG
+	int end;
 	int i;
+	int counter = 0;
 	int arrayTracker = 0;
-	char stringToCheck[512]; //string to be compared -- buffer size 512 char 
+	char stringToCheck[64 * lengthToCheck]; //string to be compared -- buffer size 64 char * length 
 
 	while(words[arrayTracker] != NULL) {
 		length = 2;
@@ -61,21 +62,30 @@ void generate_check_strings(int lengthToCheck, char* words[], FILE* checked_list
 			for(i=0; i < length; i++) {
 				if(words[arrayTracker+i] != NULL) {
 					strcat(stringToCheck, words[arrayTracker+i]);
+					strcat(stringToCheck, " ");	//TODO fix trailing space
 				}else {
 					end = 1;
 					break;
 				}			
 			}
 			if(!end) {
-				printf("%d: %s\n",length, stringToCheck);	//DEBUG
-
-				//TODO search text for stringToCheck
+				check_strings[counter] = malloc(sizeof(stringToCheck));	//allocate mem for each string
+				strcpy(check_strings[counter], stringToCheck);	//copy lint into array
+				counter++;
 			}
 
 			memset(stringToCheck, 0, sizeof(stringToCheck));	//reinitialze stringToCheck
 			length++;	
 		}
 		arrayTracker++;
+	}
+	return;
+}
+
+void free_array(char* array[], unsigned int count) {
+	int i;
+	for(i=0;i<count;i++) {
+		free(array[i]);
 	}
 	return;
 }
