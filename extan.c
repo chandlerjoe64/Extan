@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<ctype.h>
 #include<string.h>
+#include<time.h>
 #include "extan.h"
 
 
@@ -101,5 +102,7 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 				occurences++;
 			}
 		}
+		//compare number of occurences to threshold and do somthing
+		occurences = 0;
 	}
-}
+}	
