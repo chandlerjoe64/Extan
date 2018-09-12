@@ -2,7 +2,6 @@
 #include<stdlib.h>
 #include<ctype.h>
 #include<string.h>
-#include<time.h>
 #include "extan.h"
 
 
@@ -12,7 +11,6 @@ void format_text(FILE* input_text, FILE* formatted_text) {
 	char buffer[255];	//each word is read in to this buffer
 	char output[255];	//after the word is formated, it is fed to this buffer
 	memset(&output[0], 0, sizeof(output));	//initialize output buffer
-
 
 	while(fscanf(input_text, "%s", buffer) != EOF) {	//iterated over every word in the text
 		j = 0;
@@ -37,8 +35,6 @@ void populate_array(char* words[], FILE* formatted_text) {
 	//read in words from formatted_text line by line
 	char line[128];
 	int counter =0;
-
-	//rewind(formatted_text);	//move pointer back to beginning of file
 
 	while(fscanf(formatted_text, "%s", line) != EOF) {	//iterated over every word in the text
 		words[counter] = malloc(sizeof(line));	//allocate mem for each string
@@ -80,6 +76,7 @@ void generate_check_strings(int lengthToCheck, char* words[], char* check_string
 		}
 		arrayTracker++;
 	}
+	free(stringToCheck);
 	return;
 }
 
@@ -147,6 +144,7 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 	}
 
 	//cleanup
+	free(print_string);
 	free_array(dirty_array, k);
 	free_array(clean_array, l);
 }	
