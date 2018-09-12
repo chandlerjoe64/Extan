@@ -94,15 +94,59 @@ void free_array(char* array[], unsigned int count) {
 void check_for_duplicates(char* check_strings[], unsigned int count, int threshold, FILE* found) {
 	int i;
 	int j;
-	int occurences;
+	int k = 0;
+	int l = 0;
+	int occurences = 0;
+	int match;
+	char* dirty_array[count];
+	char* clean_array[count];
+	char* print_string = (char*)malloc(sizeof(char) * 128);
 
+	//iterate over each word in check_strings array
 	for(i=0;i<count;i++) {
+		//check each string against the array for matches
 		for(j=0;j<count;j++) {
+			//if string matches, increase occurence count
 			if(!(strcmp(check_strings[i],check_strings[j]))) {
 				occurences++;
 			}
 		}
-		//compare number of occurences to threshold and do somthing
+		//if occurences of string is >= threshold, generate and store formatted string
+		if(occurences >= threshold) {
+			sprintf(print_string, "%d: %s", occurences, check_strings[i]);
+			//print string to dirty array
+			dirty_array[k] = (char*)malloc((sizeof(char)) * 128);
+			strcpy(dirty_array[k],print_string);
+			k++;
+		}
+		//reset for next execution
 		occurences = 0;
+		memset(print_string, 0, sizeof(print_string));
 	}
+
+	//deduplicate array
+	for(i=0;i<k;i++){
+		match = 0;
+		for(j=0;j<l;j++) {
+			if(!strcmp(dirty_array[i],clean_array[j])) {
+				match = 1;
+			}
+		}
+		if(match == 0) {
+			//write to clean array
+			clean_array[l] = (char*)malloc(sizeof(char) * 128);
+			strcpy(clean_array[l], dirty_array[i]);
+			l++;
+		}
+
+	}
+
+	//print clean array to file
+	for(i=0;i<l;i++) {
+		fprintf(found, "%s\n", clean_array[i]);
+	}
+
+	//cleanup
+	free_array(dirty_array, k);
+	free_array(clean_array, l);
 }	
