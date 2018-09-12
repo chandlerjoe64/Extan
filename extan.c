@@ -76,7 +76,7 @@ void generate_check_strings(int lengthToCheck, char* words[], char* check_string
 		}
 		arrayTracker++;
 	}
-	free(stringToCheck);
+	//free(stringToCheck);
 	return;
 }
 
@@ -97,7 +97,7 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 	int match;
 	char* dirty_array[count];
 	char* clean_array[count];
-	char* print_string = (char*)malloc(sizeof(char) * 128);
+	char* print_string = (char*)malloc(sizeof(char) * 128);	//seg fault here???
 
 	//iterate over each word in check_strings array
 	for(i=0;i<count;i++) {
@@ -144,7 +144,7 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 	}
 
 	//cleanup
-	free(print_string);
+	//free(print_string);
 	free_array(dirty_array, k);
 	free_array(clean_array, l);
 }	
