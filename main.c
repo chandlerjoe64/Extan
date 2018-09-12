@@ -84,6 +84,11 @@ int main(int argc, char*argv[]) {
 	//populate check_strings with generate_check_strings
 	generate_check_strings(lengthToCheck, words, check_strings);
 
+	//check for duplicate strings
+	//threshold for how many times a string must appear to be considered repeated
+	int threshold = 3;
+	check_for_duplicates(check_strings, check_count, threshold, found_list);
+
 
 	//tidy up
 	//close arrays

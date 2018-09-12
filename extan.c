@@ -89,3 +89,17 @@ void free_array(char* array[], unsigned int count) {
 	}
 	return;
 }
+
+void check_for_duplicates(char* check_strings[], unsigned int count, int threshold, FILE* found) {
+	int i;
+	int j;
+	int occurences;
+
+	for(i=0;i<count;i++) {
+		for(j=0;j<count;j++) {
+			if(!(strcmp(check_strings[i],check_strings[j]))) {
+				occurences++;
+			}
+		}
+	}
+}

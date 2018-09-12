@@ -14,3 +14,5 @@ void populate_array(char* words[], FILE* formatted_text);
 void generate_check_strings(int lengthToCheck, char* words[], char* check_strings[]);
 
 void free_array(char* array[], unsigned int count);
+
+void check_for_duplicates(char* check_strings[], unsigned int count, int threshold, FILE* found);
