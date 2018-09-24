@@ -11,7 +11,7 @@ void format_text(FILE* input_text, FILE* formatted_text);
 
 void populate_array(char* words[], FILE* formatted_text);
 
-void generate_check_strings(int lengthToCheck, char* words[], char* check_strings[]);
+void generate_check_strings(int lengthToCheck, char* words[], char** check_strings);
 
 void free_array(char* array[], unsigned int count);
 

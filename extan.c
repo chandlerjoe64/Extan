@@ -44,7 +44,7 @@ void populate_array(char* words[], FILE* formatted_text) {
 	return;
 }
 
-void generate_check_strings(int lengthToCheck, char* words[], char* check_strings[]) {
+void generate_check_strings(int lengthToCheck, char* words[], char** check_strings) {
 	int length;
 	int end;
 	int i;
@@ -66,7 +66,7 @@ void generate_check_strings(int lengthToCheck, char* words[], char* check_string
 				}			
 			}
 			if(!end) {
-				check_strings[counter] = malloc(sizeof(stringToCheck));	//allocate mem for each string
+				check_strings[counter] = (char*)malloc(sizeof(stringToCheck));	//allocate mem for each string
 				strcpy(check_strings[counter], stringToCheck);	//copy lint into array
 				counter++;
 			}
