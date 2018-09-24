@@ -85,7 +85,9 @@ int main(int argc, char*argv[]) {
 	//tidy up
 	//close arrays
 	free_array(words, count);
+	
 	free_array(check_strings, check_count);
+	free(check_strings);
 
 	//close file pointers
 	fclose(input_text);
