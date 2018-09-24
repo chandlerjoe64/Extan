@@ -13,6 +13,7 @@ void format_text(FILE* input_text, FILE* formatted_text) {
 	char output[255];	//after the word is formated, it is fed to this buffer
 	memset(&output[0], 0, sizeof(output));	//initialize output buffer
 
+	printf("formatting source document...\n");
 	while(fscanf(input_text, "%s", buffer) != EOF) {	//iterated over every word in the text
 		j = 0;
 		for (i = 0; i < strlen(buffer); i++) {	//iterate over every character in the word
@@ -29,7 +30,7 @@ void format_text(FILE* input_text, FILE* formatted_text) {
 		memset(&output[0], 0, sizeof(output));	//clear output buffer for next iteration
 	}
 	fclose(formatted_text);
-	printf("Finished executing format_text\n");	//DEBUG
+		printf("finished...\n");
 	return;
 }
 
@@ -38,12 +39,14 @@ void populate_array(char* words[], FILE* formatted_text) {
 	char line[128];
 	int counter =0;
 
+	printf("reading formatted text into memory...\n");
 	while(fscanf(formatted_text, "%s", line) != EOF) {	//iterated over every word in the text
 		words[counter] = malloc(sizeof(line));	//allocate mem for each string
 		strcpy(words[counter], line);	//copy lint into array
 		counter++;
 	}
-	printf("Finished executing populate_array\n");	//DEBUG
+	printf("finished...\n");
+
 	return;
 }
 
@@ -55,6 +58,7 @@ void generate_check_strings(int lengthToCheck, char* words[], char** check_strin
 	int arrayTracker = 0;
 	char stringToCheck[64 * lengthToCheck]; //string to be compared -- buffer size 64 char * length 
 
+	printf("generating candidate strings...\n");
 	while(words[arrayTracker] != NULL) {
 		length = 2;
 		while(length <= lengthToCheck)	{	//generate all strings between the min and max word count
@@ -79,7 +83,7 @@ void generate_check_strings(int lengthToCheck, char* words[], char** check_strin
 		}
 		arrayTracker++;
 	}
-	printf("Finished executing generate_check_strings\n");	//DEBUG
+	printf("finished...\n");
 	return;
 }
 
@@ -113,6 +117,7 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 	char* clean_array[count];
 	char* print_string = (char*)malloc(sizeof(char) * 128);
 
+	printf("checking for duplicate strings...\n");
 	//iterate over each word in check_strings array
 	for(i=0;i<count;i++) {
 		//timer to estimate execution time remaining
@@ -147,23 +152,28 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 		int divisor = count / 100;
 		time_remaining = (one_percent_time * (double)100) - (one_percent_time * (double)percentage);
 
-		if((i % divisor) == 0) {
-			//print progress bar
-			int val = (int) (percentage);
-		    int lpad = (int) ((percentage / (double)100) * progress_width);
-		    int rpad = progress_width - lpad;
-		    printf ("\r%3d%% [%.*s%*s]", val, lpad, progress_string, rpad, "");
-		    //print time remaining
-			if(percentage > 1) {
+		//print progress bar
+		int val = (int) (percentage);
+	    int lpad = (int) ((percentage / (double)100) * progress_width);
+	    int rpad = progress_width - lpad;
+	    printf ("\r%3d%% [%.*s%*s]", val, lpad, progress_string, rpad, "");
+	    //print time remaining
+		if(percentage > 1) {
+			if(time_remaining > 300) {
+				printf(" %.0f minutes remaining", (time_remaining / 60));
+			} else {
 				printf(" %.0f seconds remaining", time_remaining);
 			}
-			fflush (stdout);
-			//iterate percentage
+		}
+		fflush (stdout);
+		//iterate percentage
+		if((i % divisor) == 0 && i > 0) {
 			percentage++;
 		}
 	}
+	printf("\n");	//newline after progress bar
+	printf("finished...\n");
 
-	printf("Beginning to deduplicate array\n");	//DEBUG
 	//deduplicate array
 	for(i=0;i<k;i++){
 		match = 0;
@@ -190,5 +200,4 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 	//free(print_string);
 	free_array(dirty_array, k);
 	free_array(clean_array, l);
-	printf("Finished executing check_for_duplicates\n");	//DEBUG
 }	
