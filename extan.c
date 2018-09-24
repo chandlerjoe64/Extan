@@ -28,6 +28,7 @@ void format_text(FILE* input_text, FILE* formatted_text) {
 		memset(&output[0], 0, sizeof(output));	//clear output buffer for next iteration
 	}
 	fclose(formatted_text);
+	printf("Finished executing format_text\n");	//DEBUG
 	return;
 }
 
@@ -41,6 +42,7 @@ void populate_array(char* words[], FILE* formatted_text) {
 		strcpy(words[counter], line);	//copy lint into array
 		counter++;
 	}
+	printf("Finished executing populate_array\n");	//DEBUG
 	return;
 }
 
@@ -76,7 +78,7 @@ void generate_check_strings(int lengthToCheck, char* words[], char** check_strin
 		}
 		arrayTracker++;
 	}
-	//free(stringToCheck);
+	printf("Finished executing generate_check_strings\n");	//DEBUG
 	return;
 }
 
@@ -93,6 +95,7 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 	int j;
 	int k = 0;
 	int l = 0;
+	int percentage = 0;
 	int occurences = 0;
 	int match;
 	char* dirty_array[count];
@@ -119,8 +122,18 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 		//reset for next execution
 		occurences = 0;
 		memset(print_string, 0, sizeof(print_string));
+		
+		//print progress
+
+		//TODO create timer which estimates time remaining
+		int divisor = count / 100;
+		if((i % divisor) == 0) {
+			printf("%d%% complete...\n",percentage);
+			percentage++;
+		}
 	}
 
+	printf("Beginning to deduplicate array\n");	//DEBUG
 	//deduplicate array
 	for(i=0;i<k;i++){
 		match = 0;
@@ -147,4 +160,5 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 	//free(print_string);
 	free_array(dirty_array, k);
 	free_array(clean_array, l);
+	printf("Finished executing check_for_duplicates\n");	//DEBUG
 }	
