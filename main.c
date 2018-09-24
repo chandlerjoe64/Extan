@@ -24,7 +24,7 @@ int main(int argc, char*argv[]) {
 	FILE *found_list;
 
 	//open files for execution and perform error checks
-	input_text = fopen("Harry Potter and the Sorcerer's Stone.txt", "r");
+	input_text = fopen("Harry Potter and the Sorcerer's Stone_short.txt", "r");
 	if(input_text == NULL) {
 		printf("Failed to open input file...\nExiting...\n");
 		exit(0);
@@ -85,7 +85,7 @@ int main(int argc, char*argv[]) {
 	//tidy up
 	//close arrays
 	free_array(words, count);
-	
+
 	free_array(check_strings, check_count);
 	free(check_strings);
 

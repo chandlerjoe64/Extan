@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<ctype.h>
 #include<string.h>
+#include<time.h>
 #include "extan.h"
 
 
@@ -91,19 +92,38 @@ void free_array(char* array[], unsigned int count) {
 }
 
 void check_for_duplicates(char* check_strings[], unsigned int count, int threshold, FILE* found) {
+	//loop control variables
 	int i;
 	int j;
 	int k = 0;
 	int l = 0;
+	//timer and progress variables
 	int percentage = 0;
+	clock_t begin;
+	clock_t end;
+	double one_percent_time;
+	double time_remaining;
+	char* progress_string = "##################################################";
+	int progress_width = 50;
+	//tracking variables
 	int occurences = 0;
 	int match;
+	//storage variables
 	char* dirty_array[count];
 	char* clean_array[count];
-	char* print_string = (char*)malloc(sizeof(char) * 128);	//seg fault here???
+	char* print_string = (char*)malloc(sizeof(char) * 128);
 
 	//iterate over each word in check_strings array
 	for(i=0;i<count;i++) {
+		//timer to estimate execution time remaining
+		if(percentage == 0) {
+			begin = clock();
+		}
+		if (percentage == 1) {
+			end = clock();
+			one_percent_time = (double)(end - begin) / CLOCKS_PER_SEC;
+		}
+
 		//check each string against the array for matches
 		for(j=0;j<count;j++) {
 			//if string matches, increase occurence count
@@ -123,12 +143,22 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 		occurences = 0;
 		memset(print_string, 0, sizeof(print_string));
 		
-		//print progress
-
-		//TODO create timer which estimates time remaining
+		//print progress bar as a percenage and remaining time		
 		int divisor = count / 100;
+		time_remaining = (one_percent_time * (double)100) - (one_percent_time * (double)percentage);
+
 		if((i % divisor) == 0) {
-			printf("%d%% complete...\n",percentage);
+			//print progress bar
+			int val = (int) (percentage);
+		    int lpad = (int) ((percentage / (double)100) * progress_width);
+		    int rpad = progress_width - lpad;
+		    printf ("\r%3d%% [%.*s%*s]", val, lpad, progress_string, rpad, "");
+		    //print time remaining
+			if(percentage > 1) {
+				printf(" %.0f seconds remaining", time_remaining);
+			}
+			fflush (stdout);
+			//iterate percentage
 			percentage++;
 		}
 	}
