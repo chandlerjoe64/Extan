@@ -148,7 +148,11 @@ void check_for_duplicates(char* check_strings[], unsigned int count) {
 		}
 		//if occurences of string is >= threshold, generate and store formatted string
 		if(occurences >= threshold) {
-			sprintf(print_string, "%d: %s", occurences, check_strings[i]);
+			if(prefix_count == 1) {
+				sprintf(print_string, "%d: %s", occurences, check_strings[i]);
+			}else {
+				sprintf(print_string, "%s", check_strings[i]);
+			}
 			//print string to dirty array
 			dirty_array[k] = (char*)malloc((sizeof(char)) * 128);
 			strcpy(dirty_array[k],print_string);
@@ -195,11 +199,14 @@ void check_for_duplicates(char* check_strings[], unsigned int count) {
 		if(match == 0) {
 			//write to clean array
 			clean_array[l] = (char*)malloc(sizeof(char) * 128);
+			dirty_array[l][strlen(dirty_array[l])-1] = 0;	//remove trailing space
 			strcpy(clean_array[l], dirty_array[i]);
 			l++;
 		}
 
 	}
+
+	//TODO optional sort
 
 	//print clean array to appropriate location
 	if(out_flag == 1) {

@@ -37,6 +37,11 @@ int out_flag = 0;
 
 int main(int argc, char*argv[]) {
 	//get command line parameters
+	if(argc ==1) {
+		printf("not enough arguments\n");	//DEBUG
+		//TODO print standard usage template
+		exit(0);
+	}
 	int param;
 	 while ((param = getopt (argc, argv, ":t:l:cf:o:")) != -1) {
 	 	switch (param) {
@@ -58,7 +63,11 @@ int main(int argc, char*argv[]) {
  				outfile_name = optarg;
  				out_flag = 1;
  				break;
-	 	}
+	 			case ':' :
+	 				printf("error: option %c requires an argument\n",optopt);
+	 				//TODO print standard usage template
+	 				exit(0);
+		 	}
 	 }
 
    	
@@ -111,7 +120,6 @@ int main(int argc, char*argv[]) {
 
 	//tidy up
 	//close arrays
-	printf("cleaning up...\n");
 	free_array(words, words_count);
 	// TODO free array? (broken))
 
@@ -119,9 +127,7 @@ int main(int argc, char*argv[]) {
 	free(check_strings);
 
 	//close file pointers
-	fclose(formatted_text);
-	printf("finished...\n");
-	
+	fclose(formatted_text);	
 	//remove tmp files after execution
 	//system("exec rm -r tmp/*");
 }

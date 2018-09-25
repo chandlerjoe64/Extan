@@ -1,40 +1,371 @@
-17: mrs dursley 
-6: privet drive 
-6: they were 
-9: to be 
-28: mr dursley 
-21: he was 
-5: was a 
-24: on the 
-6: the dursleys 
-8: had a 
-5: there was 
-11: the potters 
-19: it was 
-10: in the 
-7: the street 
-10: as he 
-5: of them 
-8: at the 
-6: out of 
-10: of the 
-7: he had 
-11: have been 
-13: the cat 
-8: in his 
-5: of his 
-5: his mind 
-7: he couldnt 
-5: people in 
-8: to the 
-10: he didnt 
-5: in a 
-5: to his 
-6: had been 
-5: into the 
-5: shooting stars 
-5: as though 
-19: professor mcgonagall 
-6: said professor 
-6: said professor mcgonagall 
-9: said dumbledore 
+mrs dursley
+privet drive
+they were
+they were
+to be
+mr dursley
+he was
+was a
+mrs dursley
+on the
+the dursleys
+had a
+there was
+the dursleys
+had a
+the potters
+mrs dursley
+it was
+to be
+the dursleys
+the potters
+in the
+the street
+the dursleys
+the potters
+had a
+the potters
+mrs dursley
+on the
+there was
+mr dursley
+as he
+mrs dursley
+of them
+mr dursley
+mrs dursley
+on the
+at the
+mr dursley
+as he
+out of
+it was
+on the
+of the
+the street
+mr dursley
+he had
+there was
+was a
+on the
+privet drive
+have been
+have been
+of the
+mr dursley
+at the
+the cat
+mr dursley
+the cat
+in his
+it was
+privet drive
+at the
+mr dursley
+the cat
+out of
+of his
+his mind
+as he
+he was
+on the
+out of
+of his
+his mind
+as he
+in the
+he couldnt
+to be
+people in
+mr dursley
+on the
+they were
+mr dursley
+of them
+to be
+he was
+mr dursley
+mr dursley
+in the
+his mind
+mr dursley
+to the
+in his
+on the
+he didnt
+in the
+the street
+of them
+mr dursley
+had a
+he was
+in a
+people in
+of them
+to the
+as he
+he didnt
+he couldnt
+it was
+in a
+they were
+the potters
+mr dursley
+at the
+to his
+his mind
+he was
+he was
+had a
+have been
+there was
+mrs dursley
+he didnt
+had a
+people in
+he was
+it was
+was a
+mr dursley
+he didnt
+to the
+on the
+in a
+mr dursley
+mr dursley
+to the
+he had
+had been
+he had
+had been
+he was
+to his
+he was
+he had
+he didnt
+as he
+into the
+it was
+he was
+it was
+mr dursley
+the cat
+mr dursley
+into the
+he was
+to his
+mrs dursley
+had a
+mr dursley
+had been
+into the
+on the
+have been
+have been
+to be
+have been
+have been
+of the
+had a
+shooting stars
+have been
+mr dursley
+in his
+shooting stars
+people in
+the potters
+mrs dursley
+into the
+it was
+as he
+he had
+mrs dursley
+on the
+mr dursley
+shooting stars
+people in
+mrs dursley
+it was
+mrs dursley
+mr dursley
+he didnt
+as he
+mrs dursley
+mr dursley
+he didnt
+on the
+mrs dursley
+in the
+mr dursley
+to the
+into the
+the cat
+it was
+privet drive
+as though
+the potters
+they were
+he didnt
+the dursleys
+mrs dursley
+mr dursley
+in his
+his mind
+the potters
+there was
+mrs dursley
+the potters
+he couldnt
+he was
+mr dursley
+have been
+the cat
+on the
+it was
+on the
+privet drive
+on the
+it was
+the cat
+on the
+the cat
+had been
+out of
+of the
+privet drive
+he was
+of his
+he was
+as though
+had been
+he had
+in a
+to his
+he was
+in his
+he was
+at the
+the cat
+of the
+the street
+of the
+the cat
+he was
+in his
+to be
+in the
+on the
+in the
+of the
+the cat
+out of
+mrs dursley
+on the
+the street
+on the
+to the
+the cat
+he didnt
+professor mcgonagall
+at the
+he was
+of the
+the cat
+it was
+said professor
+said professor mcgonagall
+professor mcgonagall
+have been
+professor mcgonagall
+it was
+at the
+the dursleys
+shooting stars
+they were
+shooting stars
+said dumbledore
+said professor
+said professor mcgonagall
+professor mcgonagall
+on the
+as though
+he was
+he didnt
+on the
+said dumbledore
+to be
+said professor
+said professor mcgonagall
+professor mcgonagall
+as though
+have been
+professor mcgonagall
+to be
+said professor
+said professor mcgonagall
+professor mcgonagall
+said dumbledore
+professor mcgonagall
+to the
+professor mcgonagall
+had been
+it was
+it was
+the potters
+professor mcgonagall
+on the
+the potters
+he couldnt
+he couldnt
+he couldnt
+professor mcgonagall
+he couldnt
+in the
+said dumbledore
+professor mcgonagall
+as he
+it was
+was a
+in his
+it was
+said professor
+said professor mcgonagall
+professor mcgonagall
+to his
+professor mcgonagall
+the street
+said dumbledore
+professor mcgonagall
+on the
+in a
+in the
+said dumbledore
+of his
+professor mcgonagall
+as though
+said dumbledore
+in the
+said professor
+said professor mcgonagall
+professor mcgonagall
+the street
+at the
+out of
+of the
+on the
+of them
+it was
+to the
+he was
+to be
+of his
+he had
+in his
+he was
+said dumbledore
+as he
+professor mcgonagall
+was a
+professor mcgonagall
+said dumbledore
+of the
