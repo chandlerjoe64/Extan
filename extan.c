@@ -89,12 +89,10 @@ void generate_check_strings(int lengthToCheck, char* words[], char** check_strin
 }
 
 void free_array(char** array, int count) {
-	double x =0;
+	int i =0;
 	printf("freeing new array\n");
-	for(x=0;x<count;x++) {
-		//printf("freeing element %.0f\n",x);	//DEBUG
-		//nanosleep((const struct timespec[]){{0, 1000000L}}, NULL); //DEBUG	//for some god damned reason, fixes problem where x was defaulting back to 0 mid-execution
-		free(array[(int)x]);
+	for(i=0;i<count;i++) {
+		free(array[i]);
 	}
 	return;
 }

@@ -82,9 +82,11 @@ int main(int argc, char*argv[]) {
 	int threshold = 5;	//threshold for how many times a string must appear to be considered repeated
 	check_for_duplicates(check_strings, check_count, threshold, found_list);
 
+
 	//tidy up
 	//close arrays
 	free_array(words, words_count);
+	free(words);
 
 	free_array(check_strings, (int)check_count);
 	free(check_strings);
