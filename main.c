@@ -31,14 +31,17 @@ int main(int argc, char*argv[]) {
 	int prefix_count = 0;
 
 	int param;
-	 while ((param = getopt (argc, argv, ":t:l:")) != -1) {
+	 while ((param = getopt (argc, argv, ":t:l:c")) != -1) {
 	 	switch (param) {
 	 		case 't':
-	 			threshold = (int)*optarg;
+	 			threshold = atoi(optarg);
+	 			break;
 	 		case 'l':
-	 			lengthToCheck = (int)*optarg;
+	 			lengthToCheck = atoi(optarg);
+	 			break;
 	 		case 'c':
 	 			prefix_count = 1;
+	 			break;
 	 	}
 	 }
 
