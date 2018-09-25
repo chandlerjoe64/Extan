@@ -6,12 +6,20 @@
 #include "extan.h"
 
 
-void format_text(FILE* input_text, FILE* formatted_text) {
+void format_text(FILE* formatted_text) {
 	int i;
 	int j;
 	char buffer[255];	//each word is read in to this buffer
 	char output[255];	//after the word is formated, it is fed to this buffer
 	memset(&output[0], 0, sizeof(output));	//initialize output buffer
+
+	//perform error checking on source file
+
+	FILE* input_text = fopen(file_name, "r");
+	if(input_text == NULL) {
+		printf("Failed to open input file...\nExiting...\n");
+		exit(0);
+	}
 
 	printf("formatting source document...\n");
 	while(fscanf(input_text, "%s", buffer) != EOF) {	//iterated over every word in the text
@@ -29,6 +37,7 @@ void format_text(FILE* input_text, FILE* formatted_text) {
 
 		memset(&output[0], 0, sizeof(output));	//clear output buffer for next iteration
 	}
+	fclose(input_text);
 	fclose(formatted_text);
 		printf("finished...\n");
 	return;
@@ -96,7 +105,7 @@ void free_array(char** array, int count) {
 	return;
 }
 
-void check_for_duplicates(char* check_strings[], unsigned int count, FILE* found) {
+void check_for_duplicates(char* check_strings[], unsigned int count) {
 	//loop control variables
 	int i;
 	int j;
@@ -192,10 +201,27 @@ void check_for_duplicates(char* check_strings[], unsigned int count, FILE* found
 
 	}
 
-	//print clean array to file
-	for(i=0;i<l;i++) {
-		fprintf(found, "%s\n", clean_array[i]);
+	//print clean array to appropriate location
+	if(out_flag == 1) {
+		printf("writing to file...\n");
+		//open file for writing
+		FILE* output_text = fopen(outfile_name, "w");
+		if(output_text == NULL) {
+			printf("Failed to open output file for writing...\nExiting...\n");
+			exit(0);
+		}
+
+		for(i=0;i<l;i++) {
+		fprintf(output_text, "%s\n", clean_array[i]);
+		}
+		fclose(output_text);
+		printf("finished...\n");
+	}else {
+		for(i=0;i<l;i++) {
+			printf("%s\n", clean_array[i]);
+			}
 	}
+	
 
 	//cleanup
 	//free(print_string);

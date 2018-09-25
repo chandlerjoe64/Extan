@@ -17,21 +17,28 @@ creation of password dictionaries.
 
 
 //command line options global variables
-// -t --threshold ...sets the threshold for repetition in check_duplicates
+// -t ...sets the threshold for repetition in check_duplicates
 //defult is 5
 int threshold = 5;
-// -l --length ... sets the length of strings to check
+// -l ... sets the length of strings to check
 //default is 6
 int lengthToCheck = 5;
-// -c --count ... preface count to found strings 
+// -c ... preface count to found strings 
 //default is disabled
 int prefix_count = 0;
+//-f ... input file
+//non-optional
+char* file_name;
+//-o ... write results to outfile
+//default is stdout
+char* outfile_name;
+int out_flag = 0;
 
 
 int main(int argc, char*argv[]) {
 	//get command line parameters
 	int param;
-	 while ((param = getopt (argc, argv, ":t:l:c")) != -1) {
+	 while ((param = getopt (argc, argv, ":t:l:cf:o:")) != -1) {
 	 	switch (param) {
 	 		case 't':
 	 			threshold = atoi(optarg);
@@ -42,22 +49,21 @@ int main(int argc, char*argv[]) {
 	 		case 'c':
 	 			prefix_count = 1;
 	 			break;
+	 		case 'f' :
+ 				file_name = malloc(sizeof(char) * 256);
+ 				file_name = optarg;
+ 				break;
+	 		case 'o' :
+ 				outfile_name = malloc(sizeof(char) * 256);
+ 				outfile_name = optarg;
+ 				out_flag = 1;
+ 				break;
 	 	}
 	 }
 
    	
 	//initialize file pointers
-	FILE *input_text;
 	FILE *formatted_text;
-	FILE *checked_list;
-	FILE *found_list;
-
-	//open files for execution and perform error checks
-	input_text = fopen("Harry Potter and the Sorcerer's Stone_short.txt", "r");
-	if(input_text == NULL) {
-		printf("Failed to open input file...\nExiting...\n");
-		exit(0);
-	}
 
 	formatted_text = fopen("tmp/formatted.txt", "w+");
 	if(formatted_text == NULL) {
@@ -65,13 +71,8 @@ int main(int argc, char*argv[]) {
 		exit(0);
 	}
 
-	found_list = fopen("tmp/found.txt", "w");
-	if(found_list == NULL) {
-		printf("Failed to initialize found file...\nExiting...\n");
-	}
-
 	//execute format_text to sanatize input text
-    format_text(input_text, formatted_text);
+    format_text(formatted_text);
 
     //determine word count of formatted.txt
 	unsigned int count;
@@ -105,7 +106,7 @@ int main(int argc, char*argv[]) {
 
 	//check for duplicate strings
 	//int threshold = 5;	//threshold for how many times a string must appear to be considered repeated
-	check_for_duplicates(check_strings, check_count, found_list);
+	check_for_duplicates(check_strings, check_count);
 
 
 	//tidy up
@@ -118,7 +119,6 @@ int main(int argc, char*argv[]) {
 	free(check_strings);
 
 	//close file pointers
-	fclose(input_text);
 	fclose(formatted_text);
 	printf("finished...\n");
 	

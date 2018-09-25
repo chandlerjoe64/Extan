@@ -7,7 +7,7 @@ terminating with a newline character. After each word is
 sanatized, it is writed to output_text to await further 
 operation.
 */
-void format_text(FILE* input_text, FILE* formatted_text);
+void format_text(FILE* formatted_text);
 
 int populate_array(char** words, FILE* formatted_text);
 
@@ -15,9 +15,12 @@ void generate_check_strings(char** words, char** check_strings);
 
 void free_array(char** array, int count);
 
-void check_for_duplicates(char** check_strings, unsigned int count, FILE* found);
+void check_for_duplicates(char** check_strings, unsigned int count);
 
 //global variables for command line options
 extern int prefix_count;
 extern int lengthToCheck;
 extern int threshold;
+extern char* file_name;
+extern char* outfile_name;
+extern int out_flag;
