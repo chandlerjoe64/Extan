@@ -51,7 +51,7 @@ int populate_array(char** words, FILE* formatted_text) {
 	return counter;
 }
 
-void generate_check_strings(int lengthToCheck, char* words[], char** check_strings) {
+void generate_check_strings(char* words[], char** check_strings) {
 	int length;
 	int end;
 	int i;
@@ -96,7 +96,7 @@ void free_array(char** array, int count) {
 	return;
 }
 
-void check_for_duplicates(char* check_strings[], unsigned int count, int threshold, FILE* found) {
+void check_for_duplicates(char* check_strings[], unsigned int count, FILE* found) {
 	//loop control variables
 	int i;
 	int j;

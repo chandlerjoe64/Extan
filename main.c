@@ -16,20 +16,20 @@ creation of password dictionaries.
 #include "extan.h"
 
 
+//command line options global variables
+// -t --threshold ...sets the threshold for repetition in check_duplicates
+//defult is 5
+int threshold = 5;
+// -l --length ... sets the length of strings to check
+//default is 6
+int lengthToCheck = 5;
+// -c --count ... preface count to found strings 
+//default is disabled
+int prefix_count = 0;
+
+
 int main(int argc, char*argv[]) {
-
 	//get command line parameters
-
-	// -t --threshold ...sets the threshold for repetition in check_duplicates
-	//defult is 5
-	int threshold = 5;
-	// -l --length ... sets the length of strings to check
-	//default is 6
-	int lengthToCheck = 5;
-	// -c --count ... preface count to found strings 
-	//default is disabled
-	int prefix_count = 0;
-
 	int param;
 	 while ((param = getopt (argc, argv, ":t:l:c")) != -1) {
 	 	switch (param) {
@@ -53,7 +53,7 @@ int main(int argc, char*argv[]) {
 	FILE *found_list;
 
 	//open files for execution and perform error checks
-	input_text = fopen("sample.txt", "r");
+	input_text = fopen("Harry Potter and the Sorcerer's Stone_short.txt", "r");
 	if(input_text == NULL) {
 		printf("Failed to open input file...\nExiting...\n");
 		exit(0);
@@ -101,11 +101,11 @@ int main(int argc, char*argv[]) {
 	//check_strings[check_count] = NULL;
 
 	//populate check_strings with generate_check_strings
-	generate_check_strings(lengthToCheck, words, check_strings);
+	generate_check_strings(words, check_strings);
 
 	//check for duplicate strings
 	//int threshold = 5;	//threshold for how many times a string must appear to be considered repeated
-	check_for_duplicates(check_strings, check_count, threshold, found_list);
+	check_for_duplicates(check_strings, check_count, found_list);
 
 
 	//tidy up

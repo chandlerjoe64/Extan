@@ -11,8 +11,13 @@ void format_text(FILE* input_text, FILE* formatted_text);
 
 int populate_array(char** words, FILE* formatted_text);
 
-void generate_check_strings(int lengthToCheck, char* words[], char** check_strings);
+void generate_check_strings(char** words, char** check_strings);
 
-void free_array(char* array[], int count);
+void free_array(char** array, int count);
 
-void check_for_duplicates(char** check_strings, unsigned int count, int threshold, FILE* found);
+void check_for_duplicates(char** check_strings, unsigned int count, FILE* found);
+
+//global variables for command line options
+extern int prefix_count;
+extern int lengthToCheck;
+extern int threshold;
