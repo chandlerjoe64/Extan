@@ -34,7 +34,7 @@ void format_text(FILE* input_text, FILE* formatted_text) {
 	return;
 }
 
-void populate_array(char* words[], FILE* formatted_text) {
+void populate_array(char** words, FILE* formatted_text) {
 	//read in words from formatted_text line by line
 	char line[128];
 	int counter =0;
@@ -113,8 +113,8 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 	int occurences = 0;
 	int match;
 	//storage variables
-	char* dirty_array[count];
-	char* clean_array[count];
+	char** dirty_array = malloc(sizeof(char*) * count);
+	char** clean_array = malloc(sizeof(char*) * count);
 	char* print_string = (char*)malloc(sizeof(char) * 128);
 
 	printf("checking for duplicate strings...\n");
@@ -162,7 +162,7 @@ void check_for_duplicates(char* check_strings[], unsigned int count, int thresho
 			if(time_remaining > 300) {
 				printf(" %.0f minutes remaining", (time_remaining / 60));
 			} else {
-				printf(" %.0f seconds remaining", time_remaining);
+				printf(" %.0f seconds remaining", (time_remaining + 1));
 			}
 		}
 		fflush (stdout);
