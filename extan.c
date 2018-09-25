@@ -90,7 +90,6 @@ void generate_check_strings(int lengthToCheck, char* words[], char** check_strin
 
 void free_array(char** array, int count) {
 	int i =0;
-	printf("freeing new array\n");
 	for(i=0;i<count;i++) {
 		free(array[i]);
 	}
