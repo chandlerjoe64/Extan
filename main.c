@@ -33,7 +33,9 @@ char* file_name;
 //default is stdout
 char* outfile_name;
 int out_flag = 0;
-
+//-s ... toggles printing of spaces between words
+//default is enabled
+int print_space = 1;
 
 int main(int argc, char*argv[]) {
 	//get command line parameters
@@ -43,7 +45,7 @@ int main(int argc, char*argv[]) {
 		exit(0);
 	}
 	int param;
-	 while ((param = getopt (argc, argv, ":t:l:cf:o:")) != -1) {
+	 while ((param = getopt (argc, argv, ":t:l:csf:o:")) != -1) {
 	 	switch (param) {
 	 		case 't':
 	 			threshold = atoi(optarg);
@@ -53,6 +55,9 @@ int main(int argc, char*argv[]) {
 	 			break;
 	 		case 'c':
 	 			prefix_count = 1;
+	 			break;
+	 		case 's':
+	 			print_space = 0;
 	 			break;
 	 		case 'f' :
  				file_name = malloc(sizeof(char) * 256);

@@ -24,3 +24,4 @@ extern int threshold;
 extern char* file_name;
 extern char* outfile_name;
 extern int out_flag;
+extern int print_space;

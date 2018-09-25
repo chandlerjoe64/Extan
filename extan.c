@@ -76,7 +76,9 @@ void generate_check_strings(char* words[], char** check_strings) {
 			for(i=0; i < length; i++) {
 				if(words[arrayTracker+i] != NULL) {
 					strcat(stringToCheck, words[arrayTracker+i]);
-					strcat(stringToCheck, " ");	//TODO fix trailing space
+				if(print_space == 1) {
+					strcat(stringToCheck, " ");
+				}
 				}else {
 					end = 1;
 					break;
@@ -84,7 +86,7 @@ void generate_check_strings(char* words[], char** check_strings) {
 			}
 			if(!end) {
 				check_strings[counter] = (char*)malloc(sizeof(stringToCheck));	//allocate mem for each string
-				strcpy(check_strings[counter], stringToCheck);	//copy lint into array
+				strcpy(check_strings[counter], stringToCheck);	//copy line into array
 				counter++;
 			}
 
@@ -156,6 +158,7 @@ void check_for_duplicates(char* check_strings[], unsigned int count) {
 			//print string to dirty array
 			dirty_array[k] = (char*)malloc((sizeof(char)) * 128);
 			strcpy(dirty_array[k],print_string);
+			if(print_space == 1) dirty_array[k][strlen(dirty_array[k])-1] = 0;	//remove trailing space
 			k++;
 		}
 		//reset for next execution
@@ -199,7 +202,6 @@ void check_for_duplicates(char* check_strings[], unsigned int count) {
 		if(match == 0) {
 			//write to clean array
 			clean_array[l] = (char*)malloc(sizeof(char) * 128);
-			dirty_array[l][strlen(dirty_array[l])-1] = 0;	//remove trailing space
 			strcpy(clean_array[l], dirty_array[i]);
 			l++;
 		}
