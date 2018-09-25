@@ -34,20 +34,21 @@ void format_text(FILE* input_text, FILE* formatted_text) {
 	return;
 }
 
-void populate_array(char** words, FILE* formatted_text) {
+int populate_array(char** words, FILE* formatted_text) {
 	//read in words from formatted_text line by line
-	char line[128];
+	char* line = malloc(sizeof(char) * 128);
 	int counter =0;
 
 	printf("reading formatted text into memory...\n");
 	while(fscanf(formatted_text, "%s", line) != EOF) {	//iterated over every word in the text
-		words[counter] = malloc(sizeof(line));	//allocate mem for each string
+		words[counter] = malloc(sizeof(char*) * 128);	//allocate mem for each string
 		strcpy(words[counter], line);	//copy lint into array
+		memset(&line[0], 0, sizeof(line));
 		counter++;
 	}
 	printf("finished...\n");
 
-	return;
+	return counter;
 }
 
 void generate_check_strings(int lengthToCheck, char* words[], char** check_strings) {
@@ -87,10 +88,13 @@ void generate_check_strings(int lengthToCheck, char* words[], char** check_strin
 	return;
 }
 
-void free_array(char* array[], unsigned int count) {
-	int i;
-	for(i=0;i<count;i++) {
-		free(array[i]);
+void free_array(char** array, int count) {
+	double x =0;
+	printf("freeing new array\n");
+	for(x=0;x<count;x++) {
+		//printf("freeing element %.0f\n",x);	//DEBUG
+		//nanosleep((const struct timespec[]){{0, 1000000L}}, NULL); //DEBUG	//for some god damned reason, fixes problem where x was defaulting back to 0 mid-execution
+		free(array[(int)x]);
 	}
 	return;
 }

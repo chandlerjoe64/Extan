@@ -24,7 +24,7 @@ int main(int argc, char*argv[]) {
 	FILE *found_list;
 
 	//open files for execution and perform error checks
-	input_text = fopen("Harry Potter and the Sorcerer's Stone.txt", "r");
+	input_text = fopen(argv[1], "r");
 	if(input_text == NULL) {
 		printf("Failed to open input file...\nExiting...\n");
 		exit(0);
@@ -59,7 +59,7 @@ int main(int argc, char*argv[]) {
 
 	//initialize words and populate array
 	char** words = malloc(sizeof(char*) * count);
-	populate_array(words, formatted_text);
+	int words_count = populate_array(words, formatted_text);
 	words[count] = NULL;	//null terminate the array
 
 
@@ -84,9 +84,9 @@ int main(int argc, char*argv[]) {
 
 	//tidy up
 	//close arrays
-	free_array(words, count);
+	free_array(words, words_count);
 
-	free_array(check_strings, check_count);
+	free_array(check_strings, (int)check_count);
 	free(check_strings);
 
 	//close file pointers
