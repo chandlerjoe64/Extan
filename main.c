@@ -21,7 +21,7 @@ creation of password dictionaries.
 //defult is 5
 int threshold = 5;
 // -l ... sets the length of strings to check
-//default is 6
+//default is 5
 int lengthToCheck = 5;
 // -c ... preface count to found strings 
 //default is disabled
@@ -40,8 +40,9 @@ int print_space = 1;
 int main(int argc, char*argv[]) {
 	//get command line parameters
 	if(argc ==1) {
-		printf("not enough arguments\n");	//DEBUG
+		//printf("not enough arguments\n");	//DEBUG
 		//TODO print standard usage template
+		print_standard_usage(argv[0]);
 		exit(0);
 	}
 	int param;

@@ -17,6 +17,8 @@ void free_array(char** array, int count);
 
 void check_for_duplicates(char** check_strings, unsigned int count);
 
+void print_standard_usage(char* command);
+
 //global variables for command line options
 extern int prefix_count;
 extern int lengthToCheck;
