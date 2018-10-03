@@ -6,9 +6,11 @@
 #include "extan.h"
 
 
-void format_text(FILE* formatted_text) {
+char** format_text(int* formatted_text_count) {
 	int i;
 	int j;
+	int k = 0;
+	int counter = 0;
 	char buffer[255];	//each word is read in to this buffer
 	char output[255];	//after the word is formated, it is fed to this buffer
 	memset(&output[0], 0, sizeof(output));	//initialize output buffer
@@ -20,6 +22,25 @@ void format_text(FILE* formatted_text) {
 		exit(0);
 	}
 
+	//iterate over file to get count
+	while(fscanf(input_text, "%s", buffer) != EOF) {
+		j = 0;
+		for (i = 0; i < strlen(buffer); i++) {	//iterate over every character in the word
+			if(!(ispunct(buffer[i]))) {
+				j++;
+			}
+		}	
+		if(j == 0) continue;
+		counter++;
+	}
+	
+	//create array
+	char** formatted_text = malloc(sizeof(char*) * (counter));
+
+	//reset file pointer
+	rewind(input_text);
+
+	//format and write to array
 	printf("formatting source document...\n");
 	while(fscanf(input_text, "%s", buffer) != EOF) {	//iterated over every word in the text
 		j = 0;
@@ -31,35 +52,22 @@ void format_text(FILE* formatted_text) {
 		}	
 		if(j == 0) continue;		//if string is empty, do not write to output file
 
-		output[j] = '\n';			//append newline to each word 
-		fputs(output, formatted_text);	//write each word to formatted_text
+		//write to array
+		formatted_text[k] = malloc(sizeof(output));
+		strcpy(formatted_text[k], output);
+		k++;
 
 		memset(&output[0], 0, sizeof(output));	//clear output buffer for next iteration
 	}
+	formatted_text[counter] = NULL; //null terminate array
+	*formatted_text_count = counter;
 	fclose(input_text);
-	fclose(formatted_text);
-		printf("finished...\n");
-	return;
-}
-
-int populate_array(char** words, FILE* formatted_text) {
-	//read in words from formatted_text line by line
-	char* line = malloc(sizeof(char) * 128);
-	int counter =0;
-
-	printf("reading formatted text into memory...\n");
-	while(fscanf(formatted_text, "%s", line) != EOF) {	//iterated over every word in the text
-		words[counter] = malloc(sizeof(char*) * 128);	//allocate mem for each string
-		strcpy(words[counter], line);	//copy lint into array
-		memset(&line[0], 0, sizeof(line));
-		counter++;
-	}
 	printf("finished...\n");
-
-	return counter;
+	return formatted_text;
 }
 
-void generate_check_strings(char* words[], char** check_strings) {
+
+void generate_check_strings(char** formatted_text, char** check_strings) {
 	int length;
 	int end;
 	int i;
@@ -68,13 +76,13 @@ void generate_check_strings(char* words[], char** check_strings) {
 	char stringToCheck[64 * lengthToCheck]; //string to be compared -- buffer size 64 char * length 
 
 	printf("generating candidate strings...\n");
-	while(words[arrayTracker] != NULL) {
+	while(formatted_text[arrayTracker] != NULL) {
 		length = 2;
 		while(length <= lengthToCheck)	{	//generate all strings between the min and max word count
 			end = 0;
 			for(i=0; i < length; i++) {
-				if(words[arrayTracker+i] != NULL) {
-					strcat(stringToCheck, words[arrayTracker+i]);
+				if(formatted_text[arrayTracker+i] != NULL) {
+					strcat(stringToCheck, formatted_text[arrayTracker+i]);
 				if(print_space == 1) {
 					strcat(stringToCheck, " ");
 				}

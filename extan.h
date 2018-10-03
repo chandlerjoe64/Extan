@@ -7,11 +7,9 @@ terminating with a newline character. After each word is
 sanatized, it is writed to output_text to await further 
 operation.
 */
-void format_text(FILE* formatted_text);
+char** format_text(int* formatted_text_count);
 
-int populate_array(char** words, FILE* formatted_text);
-
-void generate_check_strings(char** words, char** check_strings);
+void generate_check_strings(char** formatted_text, char** check_strings);
 
 void free_array(char** array, int count);
 
