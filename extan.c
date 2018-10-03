@@ -24,6 +24,7 @@ char** format_text(int* formatted_text_count) {
 
 	//iterate over file to get count
 	while(fscanf(input_text, "%s", buffer) != EOF) {
+		//ensure string isn't exclusivley illegal characters
 		j = 0;
 		for (i = 0; i < strlen(buffer); i++) {	//iterate over every character in the word
 			if(!(ispunct(buffer[i]))) {
@@ -31,16 +32,17 @@ char** format_text(int* formatted_text_count) {
 			}
 		}	
 		if(j == 0) continue;
+		//if string is legal, iterate counter
 		counter++;
 	}
 	
-	//create array
+	//initialize array
 	char** formatted_text = malloc(sizeof(char*) * (counter));
 
 	//reset file pointer
 	rewind(input_text);
 
-	//format and write to array
+	//format strings and prepare for writing
 	printf("formatting source document...\n");
 	while(fscanf(input_text, "%s", buffer) != EOF) {	//iterated over every word in the text
 		j = 0;
@@ -278,6 +280,12 @@ void print_standard_usage(char* command) {
 	printf("\t-s\n");
 	printf("\t\tstrip spaces from the resulting word-groups (default is disalbed)\n");
 	printf("\t\texample: %s -s -f [FILE]\n", command);
+
+	//sort
+	printf("\t-r\n");
+	printf("\t\tsort the results by occurence if [-c] is provided, otherwise alphabetically (BETA feaure, Debian only)\n");
+	printf("\t\trequires an output file be specified with the [-o] option\n");
+	printf("\t\texample: %s -o [OUTFILE] -r -f [FILE]\n", command);
 
 	//diplay this message
 	printf("\t-h\n");

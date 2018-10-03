@@ -12,6 +12,7 @@ creation of password dictionaries.
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include <unistd.h>
 #include "extan.h"
 
@@ -36,6 +37,10 @@ int out_flag = 0;
 //-s ... toggles printing of spaces between words
 //default is enabled
 int print_space = 1;
+//-h ... print usage message
+//-r ... sort the results alphabetically or by occurence
+//default is disabled
+int sort_flag = 0;
 
 int main(int argc, char*argv[]) {
 	//get command line parameters
@@ -45,7 +50,7 @@ int main(int argc, char*argv[]) {
 		exit(0);
 	}
 	int param;
-	 while ((param = getopt (argc, argv, ":t:l:csf:o:h")) != -1) {
+	 while ((param = getopt (argc, argv, ":t:l:csf:o:hr")) != -1) {
 	 	switch (param) {
 	 		case 't':
 	 			threshold = atoi(optarg);
@@ -72,11 +77,21 @@ int main(int argc, char*argv[]) {
  				print_standard_usage(argv[0]);
  				exit(0);
  				break;
+ 			case 'r' :
+ 				sort_flag = 1;
+ 				break;
 	 			case ':' :
 	 				printf("error: option %c requires an argument\n",optopt);
 	 				print_standard_usage(argv[0]);
 	 				exit(0);
 		 	}
+	 }
+	 //check for option conficts
+	 //ensure outfile is specified with sort option
+	 if((out_flag ==0) && (sort_flag == 1)) {
+	 	printf("the sort options requres that an output file be specified...\n");
+	 	print_standard_usage(argv[0]);
+	 	exit(0);
 	 }
 
 	//execute format_text to sanatize input text
@@ -100,11 +115,32 @@ int main(int argc, char*argv[]) {
 	//int threshold = 5;	//threshold for how many times a string must appear to be considered repeated
 	check_for_duplicates(check_strings, check_count);
 
+	//sort results if applicable
+	if(sort_flag == 1 && prefix_count == 1) {
+		char command[128];
+		sprintf(command, "sort -hr %s > %s.tmp",outfile_name,outfile_name);
+		//printf("SORTING WITH THIS COMMAND: %s\n\n", command);	//DEBUG
+		system(command);
+		//move tmp file into outfile
+		sprintf(command, "mv %s.tmp %s", outfile_name, outfile_name);
+		system(command);
+	}
+	//if count option isn't enabled, dont sort reverse
+	else if(sort_flag == 1 && prefix_count == 0) {
+		char command[128];
+		sprintf(command, "sort -h %s > %s.tmp",outfile_name,outfile_name);
+		//printf("SORTING WITH THIS COMMAND: %s\n\n", command);	//DEBUG
+		system(command);
+		//move tmp file into outfile
+		sprintf(command, "mv %s.tmp %s", outfile_name, outfile_name);
+		system(command);
+	}
+
 
 	//tidy up
 	//close arrays
 	free_array(formatted_text, formatted_text_count);
-	// TODO free array? (broken))
+	free(formatted_text);
 
 	free_array(check_strings, (int)check_count);
 	free(check_strings);

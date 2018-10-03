@@ -1,10 +1,11 @@
 consider multithreading
-fix formatted.txt being written to disk (keep in memory)
 man-page/website
 write-up and promotion
 write README
 consider packaging and build-tools
 consider implemenation on windows
-sort results
+
 clean up garbage phrases
 internal documentation
+free filenames
+check system if sort is installed
