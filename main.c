@@ -5,7 +5,7 @@ email: chandlerjoe64@gmail.com
 
 /*
 EXTAN (tEXT_ANanlysis) is a program which iterates over a given 
-body of text to derive repeated patters of words. Its purpose 
+body of text to derive repeated patterns of words. Its purpose 
 is to identify phrases or other repeating patterns to aid in the 
 creation of password dictionaries.
 */
@@ -39,14 +39,13 @@ int print_space = 1;
 
 int main(int argc, char*argv[]) {
 	//get command line parameters
+	//if not options are supplied
 	if(argc ==1) {
-		//printf("not enough arguments\n");	//DEBUG
-		//TODO print standard usage template
 		print_standard_usage(argv[0]);
 		exit(0);
 	}
 	int param;
-	 while ((param = getopt (argc, argv, ":t:l:csf:o:")) != -1) {
+	 while ((param = getopt (argc, argv, ":t:l:csf:o:h")) != -1) {
 	 	switch (param) {
 	 		case 't':
 	 			threshold = atoi(optarg);
@@ -69,9 +68,13 @@ int main(int argc, char*argv[]) {
  				outfile_name = optarg;
  				out_flag = 1;
  				break;
+ 			case 'h' :
+ 				print_standard_usage(argv[0]);
+ 				exit(0);
+ 				break;
 	 			case ':' :
 	 				printf("error: option %c requires an argument\n",optopt);
-	 				//TODO print standard usage template
+	 				print_standard_usage(argv[0]);
 	 				exit(0);
 		 	}
 	 }

@@ -1,40 +1,29 @@
-17: mrs dursley
-6: privet drive
-6: they were
-9: to be
-28: mr dursley
-21: he was
-5: was a
-24: on the
-6: the dursleys
-8: had a
-5: there was
-11: the potters
-19: it was
-10: in the
-7: the street
-10: as he
-5: of them
-8: at the
-6: out of
-10: of the
-7: he had
-11: have been
-13: the cat
-8: in his
-5: of his
-5: his mind
-7: he couldnt
-5: people in
-8: to the
-10: he didnt
-5: in a
-5: to his
-6: had been
-5: into the
-5: shooting stars
-5: as though
-19: professor mcgonagall
-6: said professor
-6: said professor mcgonagall
-9: said dumbledore
+17: mrsdursley
+6: privetdrive
+6: theywere
+9: tobe
+28: mrdursley
+21: hewas
+24: onthe
+6: thedursleys
+8: hada
+11: thepotters
+19: itwas
+10: inthe
+7: thestreet
+10: ashe
+8: atthe
+6: outof
+10: ofthe
+7: hehad
+11: havebeen
+13: thecat
+8: inhis
+7: hecouldnt
+8: tothe
+10: hedidnt
+6: hadbeen
+19: professormcgonagall
+6: saidprofessor
+6: saidprofessormcgonagall
+9: saiddumbledore

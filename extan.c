@@ -14,7 +14,6 @@ void format_text(FILE* formatted_text) {
 	memset(&output[0], 0, sizeof(output));	//initialize output buffer
 
 	//perform error checking on source file
-
 	FILE* input_text = fopen(file_name, "r");
 	if(input_text == NULL) {
 		printf("Failed to open input file...\nExiting...\n");
@@ -241,29 +240,42 @@ void check_for_duplicates(char* check_strings[], unsigned int count) {
 void print_standard_usage(char* command) {
 	printf("usage: %s [OPTIONS] -f [FILE]\n", command);
 	printf("options:\n");
+
 	//input file
 	printf("\t-f [FILE]\n");
 	printf("\t\tfile of strings to be checked (required)\n");
 	printf("\t\texample: %s -f infile.txt\n", command);
+
 	//output file
 	printf("\t-o [FILE]\n");
 	printf("\t\touput results to [FILE] (default is stdout)\n");
 	printf("\t\texample: %s -o outfile.txt -f [fILE]\n",command);
+
 	//check length
 	printf("\t-l [INT]\n");
 	printf("\t\tmax number of words in word-group to check (default is 5)\n");
 	printf("\t\texample: %s -l 4 -f [FILT]\n",command);
+
 	//match threshold
 	printf("\t-t [INT]\n");
 	printf("\t\tthreshold of how many times a word-group must appear to be included in results (default is 5)\n");
 	printf("\t\texample: %s -t 4 -f [FILE]\n",command);
+
 	//preface count
 	printf("\t-c\n");
 	printf("\t\tenable prepending the number of occurences of each word-group to the results (default is disalbed)\n");
 	printf("\t\texample: %s -c -f [FILE]\n", command);
+
 	//spaces in results
 	printf("\t-s\n");
 	printf("\t\tstrip spaces from the resulting word-groups (default is disalbed)\n");
 	printf("\t\texample: %s -s -f [FILE]\n", command);
 
+	//diplay this message
+	printf("\t-h\n");
+	printf("\t\tdisplay this help message and exit\n");
+	printf("\t\texample: %s -h\n", command);
+
+	//whitespace for formatting
+	printf("\n");
 }
