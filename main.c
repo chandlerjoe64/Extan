@@ -46,14 +46,14 @@ int sort_flag = 0;
 int thread_count = 2;
 
 int main(int argc, char*argv[]) {
-	//get command line parameters
-	//if not options are supplied
+	//get command line options
+	//if no options are supplied print standard usage
 	if(argc ==1) {
 		print_standard_usage(argv[0]);
 		exit(0);
 	}
 	int param;
-	 while ((param = getopt (argc, argv, ":t:l:csf:o:hrd:")) != -1) {
+	 while ((param = getopt (argc, argv, ":t:l:f:o:d:hrcs")) != -1) {
 	 	switch (param) {
 	 		case 't':
 	 			threshold = atoi(optarg);
@@ -112,7 +112,6 @@ int main(int argc, char*argv[]) {
 
 	//initialze check_strings
 	char** check_strings = malloc(sizeof(char*) * check_count);
-	//check_strings[check_count] = NULL;
 
 	//populate check_strings with generate_check_strings
 	generate_check_strings(formatted_text, check_strings);
@@ -124,7 +123,6 @@ int main(int argc, char*argv[]) {
 	if(sort_flag == 1 && prefix_count == 1) {
 		char command[128];
 		sprintf(command, "sort -hr %s > %s.tmp",outfile_name,outfile_name);
-		//printf("SORTING WITH THIS COMMAND: %s\n\n", command);	//DEBUG
 		system(command);
 		//move tmp file into outfile
 		sprintf(command, "mv %s.tmp %s", outfile_name, outfile_name);
@@ -134,7 +132,6 @@ int main(int argc, char*argv[]) {
 	else if(sort_flag == 1 && prefix_count == 0) {
 		char command[128];
 		sprintf(command, "sort -h %s > %s.tmp",outfile_name,outfile_name);
-		//printf("SORTING WITH THIS COMMAND: %s\n\n", command);	//DEBUG
 		system(command);
 		//move tmp file into outfile
 		sprintf(command, "mv %s.tmp %s", outfile_name, outfile_name);
@@ -149,5 +146,4 @@ int main(int argc, char*argv[]) {
 
 	free_array(check_strings, (int)check_count);
 	free(check_strings);
-
 }

@@ -251,11 +251,7 @@ void check_for_duplicates_manager(char* check_strings[], unsigned int count) {
 	free_array(dirty_array, k);
 	free_array(clean_array, l);
 
-	//TODO free check_array elements
-	// for(i=0;i<count;i++) {
-	// 	free(check_array[i].check_string);
-	// }
-	free(check_array);
+	// //TODO free check_array elements
 }	
 
 check_string* generate_check_array(char** check_strings, unsigned int count) {
@@ -265,7 +261,7 @@ check_string* generate_check_array(char** check_strings, unsigned int count) {
 	for(i=0;i<count;i++) {
 		check_array[i].array_size = count;
 		check_array[i].array = check_strings;
-		check_array[i].check_string = malloc(sizeof(char) * (64 * lengthToCheck));
+		(&check_array[i])->check_string = malloc(sizeof(char) * (64 * lengthToCheck));
 		check_array[i].check_string = check_strings[i];
 	}
 	return check_array;
