@@ -1,11 +1,8 @@
-consider multithreading
 man-page/website
 write-up and promotion
 write README
 consider packaging and build-tools
-consider implemenation on windows
-
-clean up garbage phrases
 internal documentation
 free filenames
+free check_array
 check system if sort is installed

@@ -41,6 +41,9 @@ int print_space = 1;
 //-r ... sort the results alphabetically or by occurence
 //default is disabled
 int sort_flag = 0;
+//-d ... set number of cores to use for duplicate check
+//default is 2
+int thread_count = 2;
 
 int main(int argc, char*argv[]) {
 	//get command line parameters
@@ -50,7 +53,7 @@ int main(int argc, char*argv[]) {
 		exit(0);
 	}
 	int param;
-	 while ((param = getopt (argc, argv, ":t:l:csf:o:hr")) != -1) {
+	 while ((param = getopt (argc, argv, ":t:l:csf:o:hrd:")) != -1) {
 	 	switch (param) {
 	 		case 't':
 	 			threshold = atoi(optarg);
@@ -79,6 +82,9 @@ int main(int argc, char*argv[]) {
  				break;
  			case 'r' :
  				sort_flag = 1;
+ 				break;
+ 			case 'd' :
+ 				thread_count = atoi(optarg);
  				break;
 	 			case ':' :
 	 				printf("error: option %c requires an argument\n",optopt);
@@ -112,8 +118,7 @@ int main(int argc, char*argv[]) {
 	generate_check_strings(formatted_text, check_strings);
 
 	//check for duplicate strings
-	//int threshold = 5;	//threshold for how many times a string must appear to be considered repeated
-	check_for_duplicates(check_strings, check_count);
+	check_for_duplicates_manager(check_strings, check_count);
 
 	//sort results if applicable
 	if(sort_flag == 1 && prefix_count == 1) {
@@ -144,4 +149,5 @@ int main(int argc, char*argv[]) {
 
 	free_array(check_strings, (int)check_count);
 	free(check_strings);
+
 }
