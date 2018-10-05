@@ -11,9 +11,10 @@ char** format_text(int* formatted_text_count) {
 	int i;
 	int j;
 	int k = 0;
+	int MAX_SIZE = 64;
 	int counter = 0;
-	char buffer[255];	//each word is read in to this buffer
-	char output[255];	//after the word is formated, it is fed to this buffer
+	char buffer[512];	//each word is read in to this buffer
+	char output[MAX_SIZE];	//after the word is formated, it is fed to this buffer
 	memset(&output[0], 0, sizeof(output));	//initialize output buffer
 
 	//perform error checking on source file
@@ -25,6 +26,12 @@ char** format_text(int* formatted_text_count) {
 
 	//iterate over file to get count
 	while(fscanf(input_text, "%s", buffer) != EOF) {
+		//if buffer is greater than 64 characters, continue
+		//assumes that the longest reasonable word is 64 chars
+		//sanitizes long links or garbage text, preventing overflows
+		//above fscanf can still be overflowed if word is greater than 512 chars
+		if((strlen(buffer)) > MAX_SIZE) continue;
+
 		//ensure string isn't exclusivley illegal characters
 		j = 0;
 		for (i = 0; i < strlen(buffer); i++) {	//iterate over every character in the word
@@ -46,6 +53,13 @@ char** format_text(int* formatted_text_count) {
 	//format strings and prepare for writing
 	printf("formatting source document...\n");
 	while(fscanf(input_text, "%s", buffer) != EOF) {	//iterated over every word in the text
+		//if buffer is greater than 64 characters, continue
+		//assumes that the longest reasonable word is 64 chars
+		//sanitizes long links or garbage text, preventing overflows
+		//above fscanf can still be overflowed if word is greater than 512 chars
+		if((strlen(buffer)) > MAX_SIZE) continue;
+
+		//ensure string isn't exclusivley illegal characters
 		j = 0;
 		for (i = 0; i < strlen(buffer); i++) {	//iterate over every character in the word
 			if(!(ispunct(buffer[i]))) {
